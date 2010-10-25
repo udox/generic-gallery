@@ -9,9 +9,9 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = ''           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = ''             # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
+DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_NAME = 'gallery'             # Or path to database file if using sqlite3.
+DATABASE_USER = 'root'             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
@@ -71,13 +71,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'generic-base.urls'
+ROOT_URLCONF = 'generic-gallery.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    #os.path.join(PROJECT_PATH, 'bbcode/templates'),
+    os.path.join(PROJECT_PATH, 'gallery/templates'),
     os.path.join(PROJECT_PATH, 'templates'),
 )
 
@@ -88,5 +88,43 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.comments',
-    'sorl.thumbnail',
+    'sorl.thumbnail'
+    'gallery',
 )
+
+GALLERY = {
+    'DEFAULT_THUMBSIZE': '120x80', # used by base/custom_filters/live_thumbnail
+    'THUMBNAIL_SIZES': (
+        ('none', 'No thumbnails shown'),
+        ('120x120', 'Large Square (120x120)'),
+        ('120x80', 'Large (120x80)'),
+        ('50x50', 'Small Square (50x50)'),
+        ('50x70', 'Small (50x70)'),
+    ),
+    'RENDER_SIZES': (
+        ('555x300', 'Main layout - body (555x300)'),
+        ('300x200', 'Small (300x200)'),
+    ),
+    'ET_DEFINITIONS': {
+        'large_square' : { 'size' : (600,600), 'options' : ['crop', 'upscale'] },
+        'small_square' : { 'size' : (100,100), 'options' : ['crop', 'upscale'] },
+        'span_8' : { 'size' : (155,116), 'options' : ['crop', 'upscale'] },
+        'mainbody' : { 'size' : (555,300), 'options' : ['crop', 'upscale'] },
+        'leftcol_nocrop' : { 'size' : (555,417), },        
+        'small_portrait' : { 'size' : (65,100), 'options' : ['crop', 'upscale'] },
+    },
+    'DISPLAY_OPTIONS': (
+        ('t', 'Thumbnails with lightbox'),
+        ('i', 'Inline with timer'),
+        ('l', 'Text link with lightbox'),
+    ),
+    'VALID_CONTENTTYPES': (
+        (48, 'Any News post'),
+        (53, 'Any Event'),
+        (55, 'Skatepark'),
+        (61, 'Particular Blog Post'),
+        (60, 'User Blog'),
+    ),
+    'BULK_PATH': '/tmp',
+    'GRID_LIMIT': 10,
+}

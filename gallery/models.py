@@ -1,5 +1,5 @@
 from django.db import models
-from base.models import NoPostBase
+#from base.models import NoPostBase
 from sorl.thumbnail.fields import ImageWithThumbnailsField
 from django.template.defaultfilters import slugify, lower
 from django.contrib.contenttypes.models import ContentType
@@ -15,6 +15,19 @@ class Gallery(NoPostBase):
         (0, 'Made via django admin'),
         (1, 'Auto-made via ZIP'),
     )
+    
+    STATUS_CHOICES = (
+        (0, 'Offline'),
+        (3, 'Preview'),
+        (5, 'Live'),
+    )
+    name = models.CharField(max_length=255)
+    slug = SlugNullField(null=True, blank=True, unique=True, max_length=255)
+    slug.help_text = 'Used to complete the url to create a unique link'
+    created_at = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=5)
+    status.help_text = 'Use this to take items off the site without deleting them'    
+    
     created_via = models.IntegerField(choices=CREATED_VIA_CHOICES, editable=False, default=0)
     thumbnail_size = models.CharField(max_length=20, choices=settings.GALLERY['THUMBNAIL_SIZES'])
     render_size = models.CharField(max_length=20, choices=settings.GALLERY['RENDER_SIZES'])
@@ -25,6 +38,13 @@ class Gallery(NoPostBase):
     object_id = models.PositiveIntegerField(blank=True, null=True)
     object_id.help_text = 'This is the object id, you can see this in the permalink or the <em>id</em> column in the admin for the news and reviews.'
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+    tags = TagField(blank=True, null=True)
+   
+    objects = models.Manager()
+    live = LiveManager()
+    
+    def get_tags(self):
+        return Tag.objects.get_for_object(self)
 
     @property
     def count(self):
@@ -81,8 +101,7 @@ class GalleryPhoto(models.Model):
             photo_pk = pk_list[0]
         else:
             photo_pk = pk_list[photo_index]       
-        return GalleryPhoto.objects.get(pk=photo_pk)
-  
+        return GalleryPhoto.objects.get(pk=photo_pk)  
     
     @property
     def gallery_postition(self):
