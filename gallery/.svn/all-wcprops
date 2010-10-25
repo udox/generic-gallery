@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/spinedjango/!svn/ver/11/gallery
+END
+admin.py
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/spinedjango/!svn/ver/11/gallery/admin.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/spinedjango/!svn/ver/11/gallery/__init__.py
+END
+models.py
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/spinedjango/!svn/ver/29/gallery/models.py
+END

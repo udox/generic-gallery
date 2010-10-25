@@ -1,0 +1,66 @@
+from django.template import Library
+from django.db.models import loading
+from django.contrib.contenttypes.models import ContentType
+from spinedjango.gallery.models import Gallery, GalleryPhoto
+from spinedjango.settings import MEDIA_URL
+
+register = Library()
+
+def display_gallery(model_name=None, oid=None, show_thumbs=True):
+    """
+        render out a gallery for a particular object. in the template
+        you can use '0' to cause it to render with links rather than
+        thumbnails. eg:
+
+        {% display_gallery "news" object.id 0 %}
+
+    """
+    images = []
+    # load our model up, this loads APP/MODEL so News.News, Review.Review etc will
+    # work fine for it, then grab the gallery images for this and render with template
+    try:
+        model = loading.get_model(model_name, model_name)
+        ctype = ContentType.objects.get_for_model(model)
+        g = Gallery.live.get(content_type=ctype, object_id=oid)
+        images = GalleryPhoto.objects.all().filter(gallery=g)
+    except:
+        pass
+    data = {
+        'gallery_images' : images,
+        'MEDIA_URL' : MEDIA_URL,
+        'show_thumbs' : show_thumbs,
+        'contenttype' : model_name,
+    }
+    return data
+
+def display_gallery_link(model_name=None, oid=None, link_text='Open Gallery'):
+    """
+        writes out a link for the gallery for a particular id, you can override the
+        text with the third argument
+    """
+    try:
+        model = loading.get_model(model_name, model_name)
+        ctype = ContentType.objects.get_for_model(model)
+        g = Gallery.live.get(content_type=ctype, object_id=oid)
+        return '<a class="iframe-gallery" href="/gallery/%d/?iframe">%s</a>' % (g.id, link_text)
+    except:
+        return ''
+
+def has_gallery(model_name=None, oid=None):
+    try:
+        model = loading.get_model(model_name, model_name)
+        ctype = ContentType.objects.get_for_model(model)
+        g = Gallery.live.get(content_type=ctype, object_id=oid)
+        if g:
+            return True
+        else:
+            return False
+    except:
+        return False
+
+
+#register.inclusion_tag(has_gallery)
+register.simple_tag(display_gallery_link)
+register.inclusion_tag('gallery/gallery_output.html')(display_gallery)
+
+
