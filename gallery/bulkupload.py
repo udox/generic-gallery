@@ -6,10 +6,8 @@ from glob import glob
 from string import Template
 from datetime import datetime
 from django.core.files import File
-from django.contrib.contenttypes.models import ContentType
 from gallery.models import Gallery, GalleryPhoto
 
-CTYPE_PRODUCT = ContentType.objects.get(app_label='event', model='mainevent')
 
 def bulkupload(obj):
     """ TODO: refactor function to be generic, not CTproduct related """

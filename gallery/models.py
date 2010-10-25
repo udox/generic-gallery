@@ -1,6 +1,9 @@
 from django.db import models
-#from base.models import NoPostBase
 from sorl.thumbnail.fields import ImageWithThumbnailsField
+from gallery.fields import SlugNullField
+from tagging.fields import Tag, TagField
+from datetime import datetime
+from managers import LiveManager
 from django.template.defaultfilters import slugify, lower
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -10,7 +13,7 @@ from django.core.files.storage import FileSystemStorage
 def get_image_path(instance, filename):
     return 'galleries/%s/%s' % (slugify(instance.gallery.name), filename)
 
-class Gallery(NoPostBase):
+class Gallery(models.Model):
     CREATED_VIA_CHOICES = (
         (0, 'Made via django admin'),
         (1, 'Auto-made via ZIP'),

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from gallery.models import Gallery, GalleryPhoto, BulkUpload
 from django.contrib.contenttypes.models import ContentType
-from base.admin import *
-from base.templatetags.custom_filters import live_thumbnail
+#from base.admin import *
+#from base.templatetags.custom_filters import live_thumbnail
 from django import forms
 from django.contrib import admin
 from datetime import datetime
@@ -81,7 +81,12 @@ class GalleryAdmin(admin.ModelAdmin):
         ('Associated Content', { 'fields' : ('content_type', 'object_id')}),
         ('Size & Format', { 'fields' : (('thumbnail_size', 'render_size'), 'display_using')}),
     )
-    fieldsets = BaseAdmin.fieldsets + fieldsets
+    
+    more_fieldsets = (
+        (None, { 'fields' : ('name', 'status', 'created_at',) }),
+        ('URL Information', { 'fields' : ('slug',), 'classes' : ['collapsed',] }),
+    )
+    fieldsets = more_fieldsets + fieldsets
 
     def save_model(self, request, obj, form, change):
         #print "save model called"
