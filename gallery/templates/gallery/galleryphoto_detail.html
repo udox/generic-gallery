@@ -1,21 +1,17 @@
-{% extends 'layouts/2col.html' %}
-
+{% load gallery_tags %}
 {% block javascript %}
-    {{ block.super }}  
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/ratings.js"></script>
+   
 {% endblock %}
 
 {% block css %}
-    {{ block.super }}
-    <link href="{{ MEDIA_URL }}css/gallery.css" rel="stylesheet" />
 {% endblock %}
+
+
 
 {% block leftcol-content %}
     <h1>{{ object.gallery.content_object.name }} Gallery</h1>
     <img src="{{ object.main_image.extra_thumbnails.leftcol_nocrop }}" />
-    <div class="photo-info">{% if object.name %}<h2>{{ object.name }}</h2>{% endif %}</div>
-    {% include 'rating/blocks/default.html' %}
-    {% include 'base/includes/echo_comments.html' %}
+    <div class="photo-info">{% if object.name %}<h2>{{ object.name }}</h2>{% endif %}</div>   
 {% endblock %}
 
 {% block rightcol-content %}

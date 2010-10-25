@@ -1,7 +1,7 @@
-{% load util_tags %}
+
 
 {% if pics %}
-    {% titlebar "Photos" %}
+    
     <ul>
     {% for pic in pics %}		
         <li class="eventsGallery"><a href="{{ MEDIA_URL }}/media/{{ pic.main_image }}" class="gallery-link"><img src="{{ pic.main_image.extra_thumbnails.small_portrait }}" rel="shadowbox" /></a></li>

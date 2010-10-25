@@ -63,6 +63,11 @@ def has_gallery(model_name=None, oid=None):
     except:
         return False
 
+@register.inclusion_tag('gallery/gallery_list.html')
+def gallery_list():
+    photos = GalleryPhoto.objects.all()
+    return photos
+
 @register.inclusion_tag('gallery/gallery_grid.html')
 def gallery_grid(app_name, model_name, oid, limit=GALLERY['GRID_LIMIT']):
     data = dict(pics=None)

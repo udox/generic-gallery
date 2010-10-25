@@ -1,0 +1,8 @@
+{% for photo in object %}
+<span style="">
+	<span style="">{{ photo.gallery.name }}</span>  
+    <img src="{{ photo.main_image.extra_thumbnails.small_square }}" />
+
+</span>
+ 
+{% endfor %}
