@@ -1,0 +1,29 @@
+{% load custom_filters %}
+
+{% block css %}
+    {{ block.super }}
+    <link href="{{ MEDIA_URL }}css/jqgallery.css" rel="stylesheet" />
+{% endblock %}
+
+<div class="jqgallery">
+	<p id='error'>We are sorry but this user gallery is empty.</p>
+	<!--img src="bigimage"/ -->
+    <div class="bigImage"><img src="{{ image.name }}" style="height: 300px"/></div>
+    <ul class="thumbs">
+{% for image in gallery_images %}
+    	<li>
+        	<a href="#" title="{{ image.name }}">
+        	{% if show_thumbs %}
+            	<img src="{{ image.main_image|live_thumbnail:"120x90" }}" />
+        	{% else %}
+                {% if image.name %}
+                    {{ image.name }}
+                {% else %}
+                    {{ image.main_image }}
+                {% endif %}
+            {% endif %}
+            </a>
+        </li>
+{% endfor %}
+    </ul>
+</div>

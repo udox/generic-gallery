@@ -1,0 +1,32 @@
+{% extends 'layouts/2col.html' %}
+
+{% block javascript %}
+    {{ block.super }}  
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/ratings.js"></script>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link href="{{ MEDIA_URL }}css/gallery.css" rel="stylesheet" />
+{% endblock %}
+
+{% block leftcol-content %}
+    <h1>{{ object.gallery.content_object.name }} Gallery</h1>
+    <img src="{{ object.main_image.extra_thumbnails.leftcol_nocrop }}" />
+    <div class="photo-info">{% if object.name %}<h2>{{ object.name }}</h2>{% endif %}</div>
+    {% include 'rating/blocks/default.html' %}
+    {% include 'base/includes/echo_comments.html' %}
+{% endblock %}
+
+{% block rightcol-content %}
+    <div class="span-8 append-1 gallery-thumb">
+       <a alt="View previous image" href="{{ object.previous.get_absolute_url }}"><img src="{{ object.previous.main_image.extra_thumbnails.span_8 }}" /></a>
+    </div>
+    <div class="span-8 last gallery-thumb">
+        <a alt="View next image" href="{{ object.next.get_absolute_url }}"><img src="{{ object.next.main_image.extra_thumbnails.span_8 }}" /></a>
+    </div>
+    <div class="span-17 gallery-links">
+        <a href="{{ object.gallery.get_absolute_url }}" rel="shadowbox;height=500;width=730;" >View all images</a><br />
+        <a href="{{ object.gallery.content_object.get_absolute_url }}">Return to the {{ object.gallery.content_object.name }} page</a>
+    </div>
+{% endblock %}

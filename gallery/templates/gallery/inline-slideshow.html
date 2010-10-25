@@ -1,0 +1,16 @@
+{% comment %}
+    This template expects to be passed a single variable called "gallery". The
+    gallery.css and jquery.galleryInline.js files should also be present in your
+    template.
+{% endcomment %}
+
+<div class="inline-gallery gallery-mainbody" id="inline-gallery-{{ gallery.pk }}">
+    {% for image in gallery.photos %}
+    <img id="gimage-{{ image.pk }}" class="gallery-image" src="{{ image.main_image.extra_thumbnails.mainbody }}" />
+    {% endfor %}
+    <div class="gallery-controls">
+        <a href="#" alt="Previous image" class="gallery-previous" id="previous-{{gallery.pk }}"> &lt; BACK</a>
+        <a href="#" alt="Next image" class="gallery-next" id="next-{{gallery.pk }}">NEXT &gt;</a>
+    </div>
+</div>
+<script type="text/javascript">$('#inline-gallery-{{ gallery.pk }}').inlineGallery();</script>
