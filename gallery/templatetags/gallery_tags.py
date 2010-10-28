@@ -86,3 +86,17 @@ def gallery_grid(app_name, model_name, oid, limit=GALLERY['GRID_LIMIT']):
 def gallery_as_grid(gallery, limit=GALLERY['GRID_LIMIT']):
     first_pic = gallery.photos().all()[0]
     return dict(pics=gallery.photos().all()[:limit], first_pic=first_pic)
+
+@register.inclusion_tag('gallery/inline-slideshow.html')
+def gallery_gallery(gallery_id):
+    """
+    The parameter passed for this method is sent by the gallery.url
+    """
+    gallery = None
+    try:
+        gallery = Gallery.objects.get(id=gallery_id)
+    except:
+        pass
+    return {
+        'gallery' : gallery,
+    }

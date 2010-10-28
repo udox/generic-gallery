@@ -1,0 +1,5 @@
+{% if object %}
+   <a href="{{ object.gallery.get_absolute_url }}">{{ object.gallery.name }}</a>
+   <div><img src="{{ object.main_image.extra_thumbnails.mainbody }}" /></div>
+{% endif %}
+

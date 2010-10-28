@@ -1,72 +1,44 @@
-/*  styles for the gallerys - combine with jquery.inlineGallery.js */
-
-.inline-gallery {
-    position:relative;
-}
-.gallery-mainbody {
-    /* the following come from settings.GALLERY_SETTINGS (with adjusted height to allow for controls) */
-    height:330px;
-    width:555px;
-}
-.gallery-controls {
-    position:absolute;
-    top:310px;
-    height:20px;
-    width:538px;
-	color: #FFFFFF;
-	background-color: #000;
-	padding: 0px 8px
-}
-
-.gallery-controls a, .gallery-controls a:hover {
- color: #fff;
- display: block;
- width: 50px;
-}
-
-.gallery-controls .gallery-next {
-float:right}
-.gallery-controls .gallery-previous {
-float:left}
-
-.gallery-image {
-    z-index:5;
-}
-.gallery-image-active {
-    z-index:20;
-}
-
-.gallery-image {
-    position:absolute;
-    top:0;
-    left:0;
-}
-
-.gallery-thumb {
-    font-size:20px;
-    text-align:center;
-}
-.gallery-thumb:hover {
-    background:#8f0000;
-}
-.gallery-link a {
-    display:block;
-}
-
-
 /* styles used in standalone for the thumbnail list */
 body {
     background: black;
     overflow-x:hidden;
 }
+#container {
+	width:555px; 
+	margin:0 auto;
+}
+#slides {
+	
+}
 .eventsGallery {
     float: left;
     margin: 0 2px 0 0;
 }
-div#container {
-    width:730px;
-    margin:auto;
+.gallerySlides {
+	overflow:hidden;
 }
-div#sb-title, div#sb-title-inner {
-    display:none;
+.gallerySlides ul li {
+    width: 555px;
+    height: 300px;
+	 
+}
+#gallerySlidesNo {
+
+}
+#gallerySlidesNo li {
+    display: inline;
+}
+#gallerySlidesNo li a {
+    display: block;
+    float: left;
+    width: 15px;
+    height: 15px;
+    margin: 0 4px 0 0;
+    padding: 0 2px 4px 2px;
+    text-align:center;
+    z-index: 9999;
+    background-color: #fff
+}
+.photo-info {
+    clear:both;
 }
