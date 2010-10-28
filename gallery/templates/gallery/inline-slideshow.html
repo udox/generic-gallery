@@ -3,12 +3,13 @@
     gallery.css and easySlider1.7.js files should also be present in your
     template.
 {% endcomment %}
-<div class="gallerySlides">
+<h2>{{ gallery.name }} - {{ gallery.photos.count }} images</h2>
+<div class="gallerySlides">	
     <ul>
         {% for image in gallery.photos %}
-        <li>
-            <img src="{{ image.main_image.extra_thumbnails.mainbody }}" />
-        </li>
+	        <li>
+	            <img src="{{ image.main_image.extra_thumbnails.mainbody }}" />
+	        </li>
         {% endfor %}
-    </ul>
+    </ul>	
 </div>
