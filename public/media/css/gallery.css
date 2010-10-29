@@ -1,10 +1,15 @@
 /* styles used in standalone for the thumbnail list */
 body {
-    background: black;
-    overflow-x:hidden;
+    background-color:#fff;
+    overflow-y: scroll;
+    font-family:Helvetica, Arial, Sans;
+    font-size:13px /* standard for the lot */
+	margin: 0px;
 }
 #container {
-	width:555px; 
+	position:relative;
+	width:555px;
+	height: 100%; 
 	margin:0 auto;
 }
 #slides {
@@ -15,18 +20,22 @@ body {
     margin: 0 2px 0 0;
 }
 .gallerySlides {
-	overflow:hidden;
+
 }
 .gallerySlides ul li {
     width: 555px;
-    height: 300px;
-	 
+    height: 300px; 
 }
 #gallerySlidesNo {
-
+    position: relative;
+    z-index: 9999;
 }
 #gallerySlidesNo li {
     display: inline;
+}
+#gallerySlidesNo li.current a {
+	background-color: #8f0000;
+    color: #fff
 }
 #gallerySlidesNo li a {
     display: block;
@@ -37,7 +46,7 @@ body {
     padding: 0 2px 4px 2px;
     text-align:center;
     z-index: 9999;
-    background-color: #fff
+    background-color: gray;
 }
 .photo-info {
     clear:both;

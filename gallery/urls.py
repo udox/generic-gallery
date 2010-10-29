@@ -4,7 +4,8 @@ from gallery.models import Gallery, GalleryPhoto
 
 
 urlpatterns = patterns('',
-                       
+    (r'^overview/$', 'gallery.views.overview', {}, 'overview'),
+            
     (r'^slide/(?P<gallery_id>[\d]+)/$', 'django.views.generic.simple.direct_to_template', {
         'template' : 'gallery/slide.html',
         'extra_context' : {
