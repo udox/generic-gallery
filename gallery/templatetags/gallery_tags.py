@@ -100,3 +100,12 @@ def gallery_gallery(gallery_id):
     return {
         'gallery' : gallery,
     }
+    
+@register.inclusion_tag('gallery/gallery_stats.html')
+def gallery_stats(gallery):
+    pic_total = gallery.photos().count()
+    
+    stats = "%s %s %s" % (gallery.name, pic_total, gallery.created_at)    
+    return stats
+    
+

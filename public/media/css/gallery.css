@@ -3,10 +3,11 @@ body {
     background-color:#fff;
     overflow-y: scroll;
     font-family:Helvetica, Arial, Sans;
-    margin:0;
     font-size:13px /* standard for the lot */
+	margin: 0px;
 }
 #container {
+	position:relative;
 	width:555px;
 	height: 100%; 
 	margin:0 auto;
@@ -23,18 +24,18 @@ body {
 }
 .gallerySlides ul li {
     width: 555px;
-    height: 300px;
-	margin: 0px;
-	padding: 0px;	 
+    height: 300px; 
 }
 #gallerySlidesNo {
     position: relative;
-    top: 15px;
-    left: 30px;
     z-index: 9999;
 }
 #gallerySlidesNo li {
     display: inline;
+}
+#gallerySlidesNo li.current a {
+	background-color: #8f0000;
+    color: #fff
 }
 #gallerySlidesNo li a {
     display: block;
