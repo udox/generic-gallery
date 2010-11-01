@@ -15,7 +15,7 @@ def photo_detail(request, gallery_slug, object_id):
     return object_detail(request, GalleryPhoto.objects.all(), object_id=object_id)
 
 def photo_list(request):
-   return render_to_response('gallery/gallery_list.html', {'object': GalleryPhoto.objects.all().order_by('gallery')},
+    return render_to_response('gallery/gallery_list.html', {'object': GalleryPhoto.objects.all().order_by('gallery')},
         context_instance=RequestContext(request))
    
 def overview(request):

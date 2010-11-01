@@ -25,8 +25,7 @@ urlpatterns = patterns('',
         'queryset' : Gallery.live.all()
     }, 'grid'),
     
-    (r'^grid/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', {
-        
+    (r'^grid/(?P<gallery_slug>[\w-]+)/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', {        
         'template_name': 'gallery/gallery_list.html',
         'queryset' : Gallery.live.all()
     }, 'grid_pk'),

@@ -1,0 +1,7 @@
+{% load gallery_tags %}
+
+{% if info %}<div class="">Random photo from {% gallery_stats random_pic.gallery %}</div> {% endif %}
+<div class=""><a href="{{ random_pic.get_absolute_url }}">
+	<img src="{{ random_pic.main_image.extra_thumbnails.mainbody }}" /></a>
+	    </div>
+	  

@@ -73,7 +73,7 @@ class Gallery(models.Model):
     
     @models.permalink
     def get_absolute_url_grid(self):
-        return ('gallery:grid_pk', (), {'object_id': self.pk,})
+        return ('gallery:grid_pk', (), {'slug_field': self.slug, 'object_id': self.pk,})
 
 class GalleryPhoto(models.Model):
     order = models.IntegerField(blank=True, null=True)
