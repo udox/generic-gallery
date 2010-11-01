@@ -1,7 +1,4 @@
-{% block css %}
-    {{ block.super }}
-    <link href="{{ MEDIA_URL }}css/gallery.css" rel="stylesheet" />
-{% endblock %}
+{% extends 'master.html' %} 
 
 {% block col-content %}
 	{% if object %}
