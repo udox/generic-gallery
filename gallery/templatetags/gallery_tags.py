@@ -3,6 +3,7 @@ from django.db.models import loading
 from django.contrib.contenttypes.models import ContentType
 from gallery.models import Gallery, GalleryPhoto
 from settings import MEDIA_URL, GALLERY
+import random
 
 register = Library()
 
@@ -106,18 +107,33 @@ def gallery_stats(gallery):
     """ Simple stats for gallery object param """
     pic_total = gallery.photos().count()   
     return {
-            'gallery': gallery.name,
-            'pic_total': pic_total,
-            'created': gallery.created_at,
-    }
-    
+            'gallery': gallery,
+            'pic_total': pic_total,          
+    }    
     
 @register.inclusion_tag('gallery/tags/gallery_totals_tag.html')
-def gallery_totals(galleries, pics):
-    """ Simple stats for all galleries """
+def gallery_totals(galleries, pics, latest_created=None):
+    """ 
+    Simple total stats for all galleries 3rd para is boolean to show extra info
+    regarding latest gallery created    
+    """    
     gallery_total = galleries.count()
     pics_total = pics.count() 
+    if latest_created:
+        latest_created = Gallery.objects.all().order_by('-created_at')[:1][0].created_at
     return {
             'gallery_total': gallery_total,
-            'pics_total': pics_total,            
+            'pics_total': pics_total, 
+            'latest_created': latest_created,           
+    }    
+
+@register.inclusion_tag('gallery/tags/gallery_random_pic_tag.html')
+def gallery_random(info=None):
+    """ Grab random image from photos info boolean to add gallery_stats tag in template tag """
+    pics = GalleryPhoto.objects.all()
+    random_pic = pics[random.randint(0,pics.count()-1)]   
+    return {
+        'random_pic' : random_pic,
+        'info': info,
     }
+    
