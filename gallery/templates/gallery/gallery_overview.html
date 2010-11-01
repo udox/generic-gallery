@@ -1,0 +1,17 @@
+{% extends 'master.html' %} 
+{% load gallery_tags %}
+
+{% block col-content %}
+<div class="">
+	<h3>{% gallery_totals object pics 1 %}</h3>
+	{% for gallery in object %}
+        {% gallery_stats gallery %} 
+	    {% with gallery.photos|first as photo %}
+		   {# with gallery.photos|slice:":0"|first as photo will return object from a list #}
+	       <a href="{{ object.photo.get_absolute_url_grid }}"><img src="{{ photo.main_image.extra_thumbnails.small_square }}" /></a><br>		  
+		{% endwith %}	 
+	{% endfor %}	
+</div>
+<br>
+{% gallery_random 1 %}
+{% endblock %} 
