@@ -13,7 +13,8 @@ urlpatterns = patterns('',
         }
     }),                   
                        
-    (r'^photo/(?P<object_id>[\d]+)', 'django.views.generic.list_detail.object_detail', {
+    (r'^photo/(?P<slug>[\w-]+)/(?P<object_id>[\d]+)', 'django.views.generic.list_detail.object_detail', {
+        'slug_field': 'slug',
         'template_name': 'gallery/gallery_photo.html',
         'queryset': GalleryPhoto.objects.all()
     }, 'photo_pk'),
@@ -24,24 +25,19 @@ urlpatterns = patterns('',
         'queryset' : Gallery.live.all()
     }, 'grid'),
     
-    (r'^grid/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', {                                                                
+    (r'^grid/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', {
+        
         'template_name': 'gallery/gallery_list.html',
         'queryset' : Gallery.live.all()
     }, 'grid_pk'),
-    
-#    (r'^all/(?P<slug>[\w-]+)/(?P<object_id>[\d]+)', 'django.views.generic.list_detail.object_detail', {
-#        'slug_field': 'slug',
-#        'template_name': 'gallery/standalone.html',
-#        'queryset': Gallery.live.all()
-#    }, 'direct_slug'),     
+       
     (r'^thumbnail-view/(?P<object_id>[\d]+)', 'django.views.generic.list_detail.object_detail', {
         'template_name': 'gallery/standalone.html',
         'queryset': Gallery.live.all()
     }, 'direct_pk'),
+    
     (r'^(?P<gallery_slug>[\w-]+)/(?P<object_id>\d+)/$', 'gallery.views.photo_detail', {}, 'photo_detail'),
     
-    (r'^standalone/(?P<ctype>\d+)/(?P<oid>\d+)/$', 'gallery.views.indirect', {}, 'indirect'),
-    
+    (r'^standalone/(?P<ctype>\d+)/(?P<oid>\d+)/$', 'gallery.views.indirect', {}, 'indirect'),    
    
 )
-#TODO: check if (r'^(?P<slug>[\w-]+)', is being used

@@ -1,5 +1,8 @@
 {% if object %}
-   <a href="{{ object.gallery.get_absolute_url }}">{{ object.gallery.name }}</a>
-   <div><img src="{{ object.main_image.extra_thumbnails.mainbody }}" /></div>
+    <div class=""><a href="{{ object.gallery.get_absolute_url_grid }}">{{ object.gallery.content_type.name }}</a></div>
+    <div class="">
+	  	 <a href="{{ object.gallery.get_absolute_url_grid }}">
+		   <img src="{{ object.main_image.extra_thumbnails.mainbody }}" />
+		 </a>
+    </div>
 {% endif %}
-

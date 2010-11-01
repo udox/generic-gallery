@@ -21,8 +21,8 @@ def photo_list(request):
 def overview(request):
     """  """
     galleries = Gallery.objects.all() 
-       
-    return render_to_response('gallery/gallery_overview.html', {'object': galleries},
+    pics = GalleryPhoto.objects.all()    
+    return render_to_response('gallery/gallery_overview.html', {'object': galleries, 'pics': pics,},
         context_instance=RequestContext(request))
     
    
