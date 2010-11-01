@@ -101,11 +101,23 @@ def gallery_gallery(gallery_id):
         'gallery' : gallery,
     }
     
-@register.inclusion_tag('gallery/gallery_stats.html')
+@register.inclusion_tag('gallery/tags/gallery_stats_tag.html')
 def gallery_stats(gallery):
-    pic_total = gallery.photos().count()
+    """ Simple stats for gallery object param """
+    pic_total = gallery.photos().count()   
+    return {
+            'gallery': gallery.name,
+            'pic_total': pic_total,
+            'created': gallery.created_at,
+    }
     
-    stats = "%s %s %s" % (gallery.name, pic_total, gallery.created_at)    
-    return stats
     
-
+@register.inclusion_tag('gallery/tags/gallery_totals_tag.html')
+def gallery_totals(galleries, pics):
+    """ Simple stats for all galleries """
+    gallery_total = galleries.count()
+    pics_total = pics.count() 
+    return {
+            'gallery_total': gallery_total,
+            'pics_total': pics_total,            
+    }

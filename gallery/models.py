@@ -61,11 +61,19 @@ class Gallery(models.Model):
     
     @property    
     def pk_list(self):
-      return list(self.galleryphoto_set.all().values_list('pk', flat=True))
+        return list(self.galleryphoto_set.all().values_list('pk', flat=True))
   
     @models.permalink
     def get_absolute_url(self):
         return ('gallery:direct_pk', (), {'object_id': self.pk,})
+    
+    @models.permalink
+    def get_absolute_url_photo(self):
+        return ('gallery:photo_pk', (), {'slug_field': self.slug, 'object_id': self.pk,})
+    
+    @models.permalink
+    def get_absolute_url_grid(self):
+        return ('gallery:grid_pk', (), {'object_id': self.pk,})
 
 class GalleryPhoto(models.Model):
     order = models.IntegerField(blank=True, null=True)
