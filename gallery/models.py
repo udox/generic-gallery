@@ -73,7 +73,11 @@ class Gallery(models.Model):
     
     @models.permalink
     def get_absolute_url_grid(self):
-        return ('gallery:grid_pk', (), {'slug_field': self.slug, 'object_id': self.pk,})
+        return ('gallery:grid_detail', (), {'gallery_slug': slugify(self.name), 'object_id': self.pk,})
+    
+    @models.permalink
+    def get_absolute_url_overview(self):
+        return ('gallery:overview', (), {})
 
 class GalleryPhoto(models.Model):
     order = models.IntegerField(blank=True, null=True)

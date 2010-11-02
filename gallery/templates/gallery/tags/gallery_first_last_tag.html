@@ -1,0 +1,11 @@
+{% if pos == 'first' %}
+<div style=""><a href="{{ pic.gallery.get_absolute_url_grid }}">
+	<img src="{{ pic.main_image.extra_thumbnails.small_square }}" /></a>
+	    </div>
+{% endif  %}
+
+{% if pos == 'last' %}	
+<div style="">last: <a href="{{ pic.gallery.get_absolute_url_grid }}">
+    <img src="{{ pic.main_image.extra_thumbnails.small_square }}" /></a>
+        </div>
+{% endif %}	  
