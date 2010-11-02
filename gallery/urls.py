@@ -19,11 +19,11 @@ urlpatterns = patterns('',
         'queryset': GalleryPhoto.objects.all()
     }, 'photo_pk'),
                       
-    (r'^g/page(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_detail', {        
-        'paginate_by': 2,                                                                
+    (r'^[\w-]+/\d+/page(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', {        
+        'paginate_by': 1,                                                                
         'template_name': 'gallery/gallery_pagi.html',
-        'queryset' : Gallery.live.all()
-    }, 'grid'),
+        'queryset' : Gallery.live.all()        
+    }, 'pagination'),
     
     (r'^grid/(?P<gallery_slug>[\w-]+)/(?P<object_id>\d+)/$', 'gallery.views.grid_detail', {}, 'grid_detail'),
     

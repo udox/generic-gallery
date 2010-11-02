@@ -78,6 +78,7 @@ class Gallery(models.Model):
     @models.permalink
     def get_absolute_url_overview(self):
         return ('gallery:overview', (), {})
+    
 
 class GalleryPhoto(models.Model):
     order = models.IntegerField(blank=True, null=True)
