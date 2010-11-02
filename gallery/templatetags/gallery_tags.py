@@ -137,3 +137,17 @@ def gallery_random(info=None):
         'info': info,
     }
     
+@register.inclusion_tag('gallery/tags/gallery_first_last_tag.html')
+def gallery_first_last(gallery, pos=None):
+    """ expects a gallery object then outputs first or last image of gallery dependant on params """
+    if pos == 'first':
+        pic = gallery.photos()[0]
+    
+    if pos == 'last':
+        pic = gallery.photos()[gallery.photos().count()-1]
+        print pic
+    return {
+        'pic' : pic,
+        'pos': pos   
+    }
+    

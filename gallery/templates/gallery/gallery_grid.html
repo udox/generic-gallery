@@ -1,17 +1,13 @@
-{% load util_tags %}
+{% extends 'master.html' %} 
 
-{% if pics %}
-    {% titlebar "Photos" %}
-    <ul>
-    {% for pic in pics %}		
-        <li class="eventsGallery"><a href="{{ MEDIA_URL }}/media/{{ pic.main_image }}" 
-		  class="gallery-link"><img src="{{ pic.main_image.extra_thumbnails.small_portrait }}" 
-		  rel="shadowbox" /></a></li>
-	{% endfor %}
-    </ul>
-    {% for pic in pics %}
-		{% if forloop.first %}			
-			<a href="{{ pic.get_absolute_url }}">See All Images</a>		
-		{% endif %}
-	{% endfor %}	
-{% endif %}
+{% block col-content %}
+	{% if object %}	
+	 <div class="photo-info">{% if object.name %}<h2>{{ object.name }}</h2>{% endif %}</div>
+	    <ul>
+	    {% for pic in object.photos %}		
+	        <li class="eventsGallery"><a href="{{ pic.get_absolute_url }}" ><img src="{{ pic.main_image.extra_thumbnails.small_square }}" /></a></li>
+		{% endfor %}
+	    </ul>	   
+	{% endif %}
+   <div class="photo-info"><a href="{{ object.get_absolute_url_overview }}">Return to the overview</a> </div> 
+{% endblock %}
