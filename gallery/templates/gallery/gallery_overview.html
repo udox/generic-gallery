@@ -8,7 +8,7 @@
         {% gallery_stats gal %} 
 	    {% with gal.photos|first as photo %}
 		   {# with gal.photos|slice:":0"|first as photo will return object from a list #}
-	       {% gallery_first_last gal 'first' %}
+	       <div styles="float:left;">{% gallery_first_last gal 'first' %}</div>
 		{% endwith %}	 
 	{% endfor %}	
 </div>

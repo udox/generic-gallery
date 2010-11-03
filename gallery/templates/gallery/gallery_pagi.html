@@ -1,20 +1,19 @@
-{% block css %}
-    {{ block.super }}
-    <link href="{{ MEDIA_URL }}css/gallery.css" rel="stylesheet" />
-{% endblock %}
+{% extends 'master.html' %}
+{% load gallery_tags %} 
+
 
 {% block col-content %}
 {% for gallery in object_list %}
-    <h3>{{ gallery.name }}</h3>
-	{% for photos in gallery.photos %}
-	 <div style="float:left;"><a href=""><img src="{{ photos.main_image.extra_thumbnails.small_square }}" /></a></div>
-	{% endfor %}
-	<br><br>
+    <div style="float:left;">
+	    <h3>{{ gallery.name }}</h3>
+		{% for photos in gallery.photos %}
+		 <div style="float:left;"><a href="{{ p }}"><img src="{{ photos.main_image.extra_thumbnails.small_square }}" /></a></div>	
+		{% endfor %}
+    </div>	
 {% endfor %}
-<div styles="clear:both;"></div>
-pagination: 
 
-{% for p in page_range %}
-    <a href="../page{{ p }}">{{ p }}</a>	
-{% endfor %}
+<div class="">
+    {% render_pagination page paginator %}
+</div>
+
 {% endblock %}

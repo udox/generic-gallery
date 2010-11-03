@@ -69,11 +69,11 @@ class Gallery(models.Model):
     
     @models.permalink
     def get_absolute_url_photo(self):
-        return ('gallery:photo_pk', (), {'slug_field': self.slug, 'object_id': self.pk,})
+        return ('gallery:photo_pk', (), { 'object_id': self.pk,'slug_field': self.slug,})
     
     @models.permalink
     def get_absolute_url_grid(self):
-        return ('gallery:grid_detail', (), {'gallery_slug': slugify(self.name), 'object_id': self.pk,})
+        return ('gallery:grid_detail', (), { 'object_id': self.pk, 'gallery_slug': slugify(self.name),})
     
     @models.permalink
     def get_absolute_url_overview(self):
