@@ -1,0 +1,16 @@
+{% extends 'master.html' %}
+{% load gallery_tags %} 
+
+
+{% block col-content %}
+{% for pic in object_list %}
+    <div style="float:left;">	
+		<div style="float:left;"><a href="{{ p }}"><img src="{{ pic.main_image.extra_thumbnails.small_square }}" /></a></div>	
+    </div>	
+{% endfor %}
+
+<div class="">
+    {% render_pagination page paginator %}
+</div>
+
+{% endblock %}

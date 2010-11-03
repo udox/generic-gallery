@@ -2,7 +2,7 @@ from django.template import Library
 from django.db.models import loading
 from django.contrib.contenttypes.models import ContentType
 from gallery.models import Gallery, GalleryPhoto
-from settings import MEDIA_URL, GALLERY
+from settings import MEDIA_URL, GALLERY, CONTENT_LIMITS
 import random
 
 register = Library()
@@ -138,16 +138,61 @@ def gallery_random(info=None):
     }
     
 @register.inclusion_tag('gallery/tags/gallery_first_last_tag.html')
-def gallery_first_last(gallery, pos=None):
-    """ expects a gallery object then outputs first or last image of gallery dependant on params """
-    if pos == 'first':
-        pic = gallery.photos()[0]
+def gallery_first_last(gallery, image=None):
+    """ 
+    expects a gallery object then outputs first or last image of gallery dependant
+    on params defaults to first
     
-    if pos == 'last':
+    """
+    if image == 'last':
+        pic = gallery.photos()[0]    
+    else:
         pic = gallery.photos()[gallery.photos().count()-1]
-        print pic
     return {
         'pic' : pic,
-        'pos': pos   
+    }
+    
+@register.inclusion_tag('gallery/tags/gallery_pagination_tag.html')
+def render_pagination(page, paginator):
+    """ Returns a paginator which always puts the current page in the
+    center of the page links to show, unless its near the start or
+    end in which case it is dropped in as normal. """
+       
+    items = CONTENT_LIMITS['PAGINATION']
+    half = int(items/2) 
+
+    start = page  
+
+    end = page + items 
+
+    if page > half: 
+        start -= half
+        end -= half
+    else:
+        start = 1
+        end = items
+
+    if end > paginator.num_pages:
+        end = paginator.num_pages
+        start = end - items
+
+    if start < 0:
+        start = 1
+        end = CONTENT_LIMITS['PAGINATION']
+        
+    if start > 1:
+        last_page = True
+    else:
+        last_page = False
+     
+#    if page_range > end:
+#        page_range = page_range[page_range]
+    page_range = range(start, end)
+    #page_range = page_range[page_range]   
+    
+    return {
+        'page' : page,
+        'page_range': page_range,
+        'last_page': last_page,
     }
     

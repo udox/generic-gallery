@@ -1,16 +1,19 @@
-{% block css %}
-    {{ block.super }}
-    <link href="{{ MEDIA_URL }}css/gallery.css" rel="stylesheet" />
-{% endblock %}
+{% extends 'master.html' %}
+{% load gallery_tags %} 
+
 
 {% block col-content %}
-	{% if object %}
-	 <div class="photo-info">{% if object.name %}<h2>{{ object.name }}</h2>{% endif %}</div>
-	    <ul>
-	    {% for pic in object.photos %}		
-	        <li class="eventsGallery"><a href="{{ pic.get_absolute_url }}" ><img src="{{ pic.main_image.extra_thumbnails.small_square }}" /></a></li>
+{% for gallery in object_list %}
+    <div style="float:left;">
+	    <h3>{{ gallery.name }}</h3>
+		{% for photos in gallery.photos %}
+		 <div style="float:left;"><a href="{{ p }}"><img src="{{ photos.main_image.extra_thumbnails.small_square }}" /></a></div>	
 		{% endfor %}
-	    </ul>	   
-	{% endif %}
-   <div class="photo-info"><a href="{{ object.content_object.get_absolute_url }}">Return to the {{ object.name }} page</a> </div> 
+    </div>	
+{% endfor %}
+
+<div class="">
+    {% render_pagination page paginator %}
+</div>
+
 {% endblock %}

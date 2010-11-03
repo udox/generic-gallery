@@ -1,5 +1,4 @@
 # django-admin.py runserver 10.10.91.123:8000 --adminmedia=D://Python26//Lib//site-packages//grappelli//media
-
 import os
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -93,6 +92,11 @@ INSTALLED_APPS = (
     'gallery',
     #'sorl.thumbnail',    
 )
+
+CONTENT_LIMITS = {
+    'PAGINATION': 10,
+    'GALLERY_LISTS': 2,
+}
 
 GALLERY = {
     'DEFAULT_THUMBSIZE': '120x80', # used by base/custom_filters/live_thumbnail

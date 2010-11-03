@@ -1,0 +1,11 @@
+<div class="pagination-controller">
+    <div class="pagination-container">
+    {% if last_page %}
+        <a class="page-first" href="?page=1">First page</a>
+    {% endif %}
+    {% for p in page_range %}
+        <a class="page-link{% ifequal page p %} page-current{% endifequal %}" href="?page={{ p }}">{{ p }}</a>
+    {% endfor %}
+        <a class="page-last" href="?page=last">Last page</a>
+    </div>
+</div>

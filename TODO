@@ -1,5 +1,20 @@
-clean redundent classes etc
-create some generic template tags
+current:
+fix slider css
+fix pagination
 
-add watermarking
-effect features(reflection need persmission)
+templates:
+big photo plus thumbnails with inline switcher
+
+template tags:
+pagination tag
+control size of images
+featured photo
+
+models:
+feature - last, random, first, choices, to image model
+
+Misc:
+clean redundant classes etc
+
+add water marking
+effect features(reflection need permission)
