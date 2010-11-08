@@ -5,6 +5,14 @@ from gallery.models import Gallery, GalleryPhoto
 
 
 urlpatterns = patterns('',
+    (r'^ajax/callback/$', 'gallery.views.ajax', {}, 'ajax'),
+    (r'^ajax/(?P<object_id>[\d]+)/$', 'django.views.generic.simple.direct_to_template', {
+        'template' : 'gallery/ajax.html',
+        'extra_context' : {
+            'gallery' : Gallery.objects.all(),
+        }
+    }),   
+    
     (r'^overview/$', 'gallery.views.overview', {}, 'overview'),
             
     (r'^slider/(?P<gallery_id>[\d]+)/$', 'django.views.generic.simple.direct_to_template', {
@@ -19,6 +27,11 @@ urlpatterns = patterns('',
         'template_name': 'gallery/gallery_photo.html',
         'queryset': GalleryPhoto.objects.all()
     }, 'photo_pk'),
+    
+     (r'^inline/[\w-]+/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+        'template_name': 'gallery/gallery_inline_static.html',
+        'queryset': Gallery.objects.all()
+    }, 'inline_static'),
     
     (r'^photos/[\w-]+/\d+/?$', 'django.views.generic.list_detail.object_list', {        
         'paginate_by': CONTENT_LIMITS['GALLERY_LISTS'],                                                                

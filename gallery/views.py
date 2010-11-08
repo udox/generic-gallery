@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.views.generic.list_detail import object_detail
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.defaultfilters import slugify
 from gallery.models import Gallery, GalleryPhoto
+from django.conf import settings
 
 def indirect(request, ctype, oid):
     """ For reversing based on a ctype & object id in templates """
@@ -36,5 +38,21 @@ def overview(request):
     pics = GalleryPhoto.objects.all()    
     return render_to_response('gallery/gallery_overview.html', {'object': galleries, 'pics': pics,},
         context_instance=RequestContext(request))
+    
+def ajax(request):
+    """ 
+    Deals with jquery ajax call for inline gallery /ajax
+    """
+    #TODO add try catches
+    if request.is_ajax():
+        if request.method == 'GET':
+            message = "GET"
+        elif request.method == 'POST':
+            img = GalleryPhoto.objects.get(id=request.POST['img'])           
+            message = "%s%s" % (settings.MEDIA_URL, img.main_image.extra_thumbnails['mainbody'].relative_url)
+            
+    else:
+        message = "ajax fail"
+    return HttpResponse(message)
     
    
