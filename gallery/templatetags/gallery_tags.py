@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from gallery.models import Gallery, GalleryPhoto
 from settings import MEDIA_URL, GALLERY, CONTENT_LIMITS
 import random
+import os
 
 register = Library()
 
@@ -109,7 +110,10 @@ def gallery_stats(gallery):
     return {
             'gallery': gallery,
             'pic_total': pic_total,          
-    }    
+    }  
+    
+
+   
     
 @register.inclusion_tag('gallery/tags/gallery_totals_tag.html')
 def gallery_totals(galleries, pics, latest_created=None):

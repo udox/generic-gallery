@@ -1,0 +1,12 @@
+<div id="title-inline"><h3>{{ data.main_gallery }}</h3></div>
+<div id="display-inline"><img src="{{ data.main_url }}" /></div>
+<div id="infocontainer-inline">    
+	<div id="info-inline">
+		<ul>
+			{% if data.main_name  %}<li>Name: {{ data.main_name }}</li>{% endif %}
+		    <li>Size: {{ data.orig_size }}kbs</li> 
+			<li>Dimensions: {{ data.orig_dimension }}</li>
+		    <li>Download: <a href="{% url gallery:download data.orig_id %}">{{ data.orig_name }}</a></li>
+		</ul>
+	</div>
+</div>
