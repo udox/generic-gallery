@@ -1,54 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Ajax With Jquery</title>
-        <style type="text/css" media="screen">
-            body{
-                background-color:#111;
-                color:#999;
-                font-family: Arial, "MS Trebuchet", sans-serif;
-            }
-            #display{
-            	
-                padding-top:10px;
-                color: white;
-				height: 300px;
-				width: 555px;
-            }
-        </style>
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript" charset="utf-8">
-            
-            $(document).ready(function(){
-                $("img").click(function(){
-                    sendValue($(this).attr("id"));
-                }); 
-            });
-            
-            function sendValue(id){
-                $.post("/gallery/ajax/callback/", {				   
-				    img: id,					
-				 },
-                function(data){
-                    $('#display').html("<img src=\""+data+"\" />");
-                }, "html");
-            };
+{% extends 'master.html' %}
 
-        </script>
-    </head>
-        
+{% block head %}
+    <title>Ajax With Jquery</title>
+{% endblock %}
 
-    <body>
-    	<center><div id="display"></div></center>
-    	 
-    	{% for gal in gallery %}
-    	   {% for photo in gal.photos %}
-		   <a href="#"><img id="{{photo.id}}" src="{{ photo.main_image.extra_thumbnails.small_square }}" /></a>
-		   {% endfor %}
-		{% endfor %}       
-       
-    </body>
-</html>
+{% block css %}	
+	<link href="{{ MEDIA_URL }}css/gallery.css" rel="stylesheet" />	
+{% endblock %}
+
+{% block js %} 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ MEDIA_URL }}js/ajax.js" type="text/javascript" charset="utf-8"></script>	
+{% endblock %}       
+
+{% block col-content %}
+	<div id="display"></div>
+	<div class="grid">
+	{% for gal in gallery %}
+	   {% for photo in gal.photos %}
+	   <a href="#"><img id="{{ photo.id }}" src="{{ photo.main_image.extra_thumbnails.small_square }}" /></a>
+	   {% endfor %}
+	{% endfor %}
+	</div>        
+{% endblock %}

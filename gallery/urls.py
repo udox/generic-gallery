@@ -5,7 +5,10 @@ from gallery.models import Gallery, GalleryPhoto
 
 
 urlpatterns = patterns('',
-    (r'^ajax/callback/$', 'gallery.views.ajax', {}, 'ajax'),
+    (r'^download/(?P<image_id>[\d]+)/$', 'gallery.views.download', {}, 'download'),
+    
+    (r'^inline/inline-callback/$', 'gallery.views.ajax', {}, 'ajax'),
+    
     (r'^ajax/(?P<object_id>[\d]+)/$', 'django.views.generic.simple.direct_to_template', {
         'template' : 'gallery/ajax.html',
         'extra_context' : {

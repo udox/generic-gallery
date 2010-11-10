@@ -1,10 +1,16 @@
 /* styles used in standalone for the thumbnail list */
 body {
-    background-color:#fff;
+	background-color:#111;
+    color:#999;
     overflow-y: scroll;
-    font-family:Helvetica, Arial, Sans;
+    font-family: Arial, "MS Trebuchet", sans-serif;
     font-size:13px /* standard for the lot */
 	margin: 0px;
+}
+.wrapper {
+	position:relative;
+	width: 860px;
+	margin:0 auto;
 }
 #container {
 	position:relative;
@@ -50,4 +56,35 @@ body {
 }
 .photo-info {
     clear:both;
+}
+/******************
+ * GALLERY INLINE *
+ ******************/
+
+/* a-z order for maintenance */
+
+#ajax-inline {
+  
+}
+#display-inline {
+    height: 300px;
+    margin: 0 auto;
+    padding: 10px 0px;   
+	width: 555px;             
+}
+#info-inline {	
+    font-size: small;           
+    padding: 0px 0px 10px 0px;
+}
+#info-inline li {
+    list-style-type: none;      
+}
+#infocontainer-inline {
+   text-align: center;
+}
+.grid-inline {
+
+}
+#title-inline {
+	
 }
